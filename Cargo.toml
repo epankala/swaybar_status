@@ -11,3 +11,4 @@ chrono = "0.4.23"
 opt-level = 'z' # Optimize for size
 lto = true
 codegen-units = 1
+strip = true
