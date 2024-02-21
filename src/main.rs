@@ -6,8 +6,10 @@
 use std::path::Path;
 use std::{fs, thread, time};
 use std::io::{stdout,Write};
-use std::process::Command;
 //use std::any::type_name;
+
+extern crate notify_rust;
+use notify_rust::Notification;
 
 static mut PREV_CAP: i32 = 0;
 
@@ -69,12 +71,11 @@ fn print_status() {
 
 		unsafe {
 			if cap_i < PREV_CAP {
-				let mut notify = Command::new("/usr/bin/notify-send");
-				notify
-					.arg("-t")
-					.arg("10000")
-					.arg(format!("Battery at {}", cap_i))
-					.output()
+				Notification::new()
+					.summary("Battery Status")
+					.body(&format!("Battery at {}", cap_i))
+					.timeout(10000) // Showing the notification for 10000ms
+					.show()
 					.expect("Failed to send notification");
 			}
 			PREV_CAP = cap_i;

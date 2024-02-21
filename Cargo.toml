@@ -6,6 +6,7 @@ version = "0.0.0"
 
 [dependencies]
 chrono = "0.4.23"
+notify-rust = "4.10.0"
 
 [profile.release]
 opt-level = 'z' # Optimize for size
